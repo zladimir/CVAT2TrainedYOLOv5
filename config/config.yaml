@@ -1,0 +1,58 @@
+#### Input ####
+source: /input  # path to raw annotations and images for parse, split and train
+
+
+#### Path to static boxes ####
+static_boxes: /config/static_boxes.yaml
+
+
+#### Data splitting ####
+train_test_split:
+    test_query: "(date == None)"
+    #test_query: "camera == '10.68.153.138'"
+    #test_query: "(date == '2022-06-22')"
+    valid_size: 0.15
+    random_state: 42
+
+
+#### Training dataset ####
+dataset:
+  yolo_dataset: /dataset
+
+
+#### Test dataset ####
+test:
+  test_images: /test/images
+  test_labels: /test/test.csv
+
+
+#### Model parameters ####
+model:
+  model_params: /config/model_config.yaml
+  project: /weights
+  run_name: detector
+  model: yolov5l
+  weights:
+  epochs: 300
+  imgsz: 1280
+  patience: 100
+  batch_size: 8
+  lr_flip: True
+  cache: True
+  ddp:
+    is_on: True
+    gpu_n: 2
+    sync_bn: True
+    device: 0,1
+
+
+#### Classes ####
+classes:
+  pos2class:
+    Standing: 0
+    Sitting: 1
+    Lateral_lying_left: 2
+    Lateral_lying_right: 3
+    Sternal_lying: 4
+    Undefined: 5
+  class2pos: [Standing, Sitting, Lateral_lying_left, Lateral_lying_right, Sternal_lying, Undefined]
