@@ -61,7 +61,6 @@ def image_processing(image: bs, path: Path) -> pd.DataFrame:
 
 def polygon_processing(polygon: bs):
     points = polygon.attrs['points']
-    # TODO: refactoring
     points = np.array(
         [list(map(float, point.split(','))) for point in points.split(';')]
     ).astype(int)
