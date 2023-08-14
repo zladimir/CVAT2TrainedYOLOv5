@@ -2,15 +2,9 @@
 source: /input  # path to raw annotations and images for parse, split and train
 
 
-#### Path to static boxes ####
-static_boxes: /config/static_boxes.yaml
-
-
 #### Data splitting ####
 train_test_split:
     test_query: "(date == None)"
-    #test_query: "camera == '10.68.153.138'"
-    #test_query: "(date == '2022-06-22')"
     valid_size: 0.15
     random_state: 42
 
